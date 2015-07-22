@@ -43,18 +43,18 @@ public abstract class WeixinSupport {
     /**
      * 微信消息处理器列表
      */
-    private static List<MessageHandle> messageHandles;
+    private static List<MessageHandle<BaseReqMsg>> messageHandles;
     /**
      * 微信事件处理器列表
      */
-    private static List<EventHandle>   eventHandles;
+    private static List<EventHandle<BaseEvent>>   eventHandles;
 
     /**
      * 子类重写，加入自定义的微信消息处理器，细化消息的处理
      *
      * @return 微信消息处理器列表
      */
-    protected List<MessageHandle> initMessageHandles() {
+    protected List<MessageHandle<BaseReqMsg>> initMessageHandles() {
         return null;
     }
 
@@ -63,7 +63,7 @@ public abstract class WeixinSupport {
      *
      * @return 微信事件处理器列表
      */
-    protected List<EventHandle> initEventHandles() {
+    protected List<EventHandle<BaseEvent>> initEventHandles() {
         return null;
     }
 
@@ -311,7 +311,7 @@ public abstract class WeixinSupport {
             }
         }
         if (isNotEmpty(messageHandles)) {
-            for (MessageHandle messageHandle : messageHandles) {
+            for (MessageHandle<BaseReqMsg> messageHandle : messageHandles) {
                 BaseMsg resultMsg = null;
                 boolean result;
                 try {
@@ -337,7 +337,7 @@ public abstract class WeixinSupport {
             }
         }
         if (isNotEmpty(eventHandles)) {
-            for (EventHandle eventHandle : eventHandles) {
+            for (EventHandle<BaseEvent> eventHandle : eventHandles) {
                 BaseMsg resultMsg = null;
                 boolean result;
                 try {
